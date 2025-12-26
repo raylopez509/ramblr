@@ -1,0 +1,19 @@
+.post {
+  border: 1px solid;
+  border-color: red;
+  display: grid;
+  grid-template-rows: min-content 1fr min-content;
+  width: 40rem;
+  height: 40rem;
+}
+
+.postFooter {
+  border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tagContainer {
+  display: flex;
+  gap: 10px;
+}
