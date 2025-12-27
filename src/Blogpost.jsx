@@ -1,18 +1,6 @@
 import './Blogpost.css'
-import { useState, useEffect } from 'react'
 
-function Blogpost() {
-  const [postData, setPostData] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:3000/posts').then(
-      res => {
-        return res.json();
-      }
-    ).then(data => {
-      setPostData(data);
-    })
-  }, []);
+function Blogpost({title, content, tags, date_created}) {
 
   function formatDate(date) {
     const dateObject = new Date(date);
@@ -22,20 +10,20 @@ function Blogpost() {
   return ( 
     <div className="post">
       <section className='postHeader'>
-        <h1>{postData[0] && postData[0].title}</h1>
+        <h1>{title}</h1>
       </section>
       <section className='postContent'>
-        <p>{postData[0] && postData[0].content}</p>
+        <p>{content}</p>
       </section>
       <section className='postFooter'>
         <div className='tagContainer'>
           {
-            postData[0] && postData[0].tags.map((tag, index) => (
+            tags.map((tag, index) => (
               <p key={index}>{tag}</p>
             ))
           }
         </div>
-        <p>{postData[0] && formatDate(postData[0].date_created)}</p>   
+        <p>{formatDate(date_created)}</p>   
       </section>
     </div>
   );
