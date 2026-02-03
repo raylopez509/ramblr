@@ -16,13 +16,12 @@ function Bloglist() {
     })
   }, []);
 
-  console.log(postData);
-
   if (postData.length === 0) {
     return <></>
   }
 
   return (
+    
     <div className='bloglist'>
       {
         postData.map(post => (
