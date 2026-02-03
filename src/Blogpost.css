@@ -4,7 +4,6 @@
   display: grid;
   grid-template-rows: min-content 1fr min-content;
   width: 40rem;
-  height: 40rem;
 }
 
 .postFooter {
