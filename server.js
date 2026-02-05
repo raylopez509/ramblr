@@ -52,8 +52,6 @@ app.post('/create', async (req, res) => {
   }
 });
 
-console.log(process.env.PG_USER);
-
 app.listen(port, () => {
   console.log(`Listening on ${port}`)
 })
