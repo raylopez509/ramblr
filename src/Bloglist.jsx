@@ -2,23 +2,13 @@ import Blogpost from './Blogpost'
 import './Bloglist.css'
 import { useState, useEffect } from 'react'
 
-function Bloglist() {
-
-  const [postData, setPostData] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:3000/posts').then(
-      res => {
-        return res.json();
-      }
-    ).then(data => {
-      setPostData(data);
-    })
-  }, []);
+function Bloglist({postData}) {
 
   if (postData.length === 0) {
     return <></>
   }
+
+  
 
   return (
     
