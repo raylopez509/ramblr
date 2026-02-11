@@ -8,8 +8,6 @@ function Bloglist({postData}) {
     return <></>
   }
 
-  
-
   return (
     
     <div className='bloglist'>
