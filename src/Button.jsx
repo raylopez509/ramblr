@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import AddPostModal from './AddPostModal'
 
-function Button() {
+function Button({ onPostCreated }) {
 
   const [showModal, setShowModal] = useState(false); 
 
@@ -10,7 +10,9 @@ function Button() {
     <>
       <button onClick={() => setShowModal(true)}>Add</button>
       {showModal && createPortal(
-        <AddPostModal onClose={() => setShowModal(false)} />,
+        <AddPostModal onClose={() => setShowModal(false)}
+          onPostCreated={onPostCreated}
+        />,
         document.body
       )}
     </>
