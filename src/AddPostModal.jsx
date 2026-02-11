@@ -3,7 +3,7 @@ import Editor from './Editor.jsx'
 import PostButton from './PostButton.jsx';
 import { useState } from 'react';
 
-function AddPostModal({ onClose }) {
+function AddPostModal({ onClose, onPostCreated }) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
@@ -27,13 +27,15 @@ function AddPostModal({ onClose }) {
     body: body,
   };
 
-  const submitPost = (e) => {
-    // e.preventDefault();
+  const submitPost = async (e) => {
+    e.preventDefault();
 
-  fetch("http://localhost:3000/create", requestOptions)
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.error(error));
+    await fetch("http://localhost:3000/create", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
+
+    await onPostCreated();
 
     onClose();
   }
