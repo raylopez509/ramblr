@@ -43,25 +43,12 @@ function AddPostModal({ onClose, onPostCreated }) {
   return (
     <section className='modal'>
       Add Post
-      {/* <input placeholder='Title'
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      ></input> */}
-      {/* <Editor /> */}
-      {/* <textarea placeholder='Make a Post!'
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-      ></textarea> */}
-      {/* <PostButton
-        title={title}
-        content={content}
-      /> */}
-      {/* <button onClick={onClose}>Cancel</button> */}
       <form onSubmit={submitPost}>
         <input placeholder='Title'
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         ></input>
+        {/* <Editor /> */}
         <textarea placeholder='Make a Post!'
           value={content}
           onChange={(e) => setContent(e.target.value)}
