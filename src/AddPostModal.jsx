@@ -2,10 +2,12 @@ import './AddPostModal.css'
 import Editor from './Editor.jsx'
 import PostButton from './PostButton.jsx';
 import { useState } from 'react';
+import InputTag from './InputTag.jsx';
 
 function AddPostModal({ onClose, onPostCreated }) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [tags, setTags] = useState([]);
 
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
@@ -13,10 +15,7 @@ function AddPostModal({ onClose, onPostCreated }) {
   const body = JSON.stringify({
     "title": title,
     "content": content,
-    "tags": [
-      "blog",
-      "test"
-    ],
+    "tags": tags,
     "date_created": "CURRENT_TIMESTAMP",
     "owner": "ray"
   })
@@ -40,6 +39,10 @@ function AddPostModal({ onClose, onPostCreated }) {
     onClose();
   }
 
+  const handleTags = (tags) => {
+    setTags(tags);
+  }
+
   return (
     <section className='modal'>
       Add Post
@@ -53,6 +56,7 @@ function AddPostModal({ onClose, onPostCreated }) {
           value={content}
           onChange={(e) => setContent(e.target.value)}
         ></textarea>
+        <InputTag currentTags={tags} handleTags={handleTags}/>
         <button type='submit'>Post</button>
         <button onClick={onClose}>Cancel</button>         
       </form>
