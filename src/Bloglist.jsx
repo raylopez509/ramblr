@@ -18,6 +18,7 @@ function Bloglist({postData}) {
             content = {post.content}
             tags = {post.tags}
             date_created={post.date_created}
+            key={post.post_id}
           />
         ))
       }
