@@ -1,0 +1,23 @@
+.tag-list {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+}
+
+.tag {
+  border: 1px blue solid;
+  display: flex;
+}
+
+.tag > button {
+  border-radius: 50%;
+}
+
+.tag-input-container {
+  width: 100%;
+}
+
+.tag-input {
+  width: 100%;
+}
