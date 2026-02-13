@@ -1,7 +1,7 @@
 import './App.css'
 import { useState, useEffect } from 'react';
 import Bloglist from './Bloglist.jsx'
-import Button from './Button.jsx'
+import AddPostButton from './AddPostButton.jsx'
 
 function App() {
 
@@ -19,7 +19,8 @@ function App() {
 
   return (
     <>
-      <Button onPostCreated={fetchPosts}/>
+      <h1>The Blog</h1>
+      <AddPostButton onPostCreated={fetchPosts}/>
       <Bloglist postData={postData}/>
     </>
   )
