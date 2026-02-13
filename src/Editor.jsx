@@ -3,7 +3,6 @@ import { FloatingMenu, BubbleMenu } from '@tiptap/react/menus'
 import StarterKit from '@tiptap/starter-kit'
 import { useMemo } from 'react'
 import MenuBar from './MenuBar'
-import PostButton from './PostButton'
 
 function Editor() {
   const editor = useEditor({
@@ -18,7 +17,6 @@ function Editor() {
     <EditorContext.Provider value={providerValue}>
       <MenuBar editor={editor}/>
       <EditorContent editor={editor} />
-      <PostButton editor={editor} />
     </EditorContext.Provider>
   )
 }
