@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import AddPostModal from './AddPostModal'
 
-function Button({ onPostCreated }) {
+function AddPostButton({ onPostCreated }) {
 
   const [showModal, setShowModal] = useState(false); 
 
@@ -19,4 +19,4 @@ function Button({ onPostCreated }) {
   );
 }
 
-export default Button;
+export default AddPostButton;
