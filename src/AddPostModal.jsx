@@ -1,6 +1,5 @@
 import './AddPostModal.css'
 import Editor from './Editor.jsx'
-import PostButton from './PostButton.jsx';
 import { useState } from 'react';
 import InputTag from './InputTag.jsx';
 
@@ -45,11 +44,12 @@ function AddPostModal({ onClose, onPostCreated }) {
 
   return (
     <section className='modal'>
-      Add Post
+      <h1 className='add-post-title'>Add Post</h1>
       <form onSubmit={submitPost}>
         <input placeholder='Title'
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          required
         ></input>
         {/* <Editor /> */}
         <textarea placeholder='Make a Post!'
