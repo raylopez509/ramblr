@@ -1,9 +1,7 @@
-import React from 'react'
-import { useState, useRef } from 'react'
-
+import './InputTag.css'
+import { useRef } from 'react'
 
 export default function InputTag({currentTags, handleTags}) {
-  // const [tags, setTags] = useState([]);
   const tagInput = useRef(null);
 
   const inputKeyDown = (e) => {
@@ -14,7 +12,6 @@ export default function InputTag({currentTags, handleTags}) {
 
     if(e.key === 'Enter' && val) {
       if(!currentTags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
-        // setTags([...tags, val]);
         handleTags([...currentTags,val]);
       }
       tagInput.current.value = null;
@@ -27,21 +24,20 @@ export default function InputTag({currentTags, handleTags}) {
   const removeTag = tagIndex => {
     const newTags = [...currentTags];
     newTags.splice(tagIndex, 1);
-    // setTags(newTags);
     handleTags(newTags);
   }
 
   return (
     <>
-      <ul>
+      <ul className='tag-list'>
         {currentTags.map((tag, i) => (
-          <li key={tag}>
+          <li key={tag} className='tag'>
             {tag}
             <button type='button' onClick={() => removeTag(i)}>X</button>
           </li>
         ))}
-        <li>
-          <input type='text' onKeyDown={inputKeyDown} ref={tagInput}/>
+        <li className='tag-input-container'>
+          <input className='tag-input' type='text' onKeyDown={inputKeyDown} ref={tagInput}/>
         </li>
       </ul>
     </>  
