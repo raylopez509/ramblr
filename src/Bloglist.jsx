@@ -1,6 +1,5 @@
 import Blogpost from './Blogpost'
 import './Bloglist.css'
-import { useState, useEffect } from 'react'
 
 function Bloglist({postData}) {
 
