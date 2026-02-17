@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import { useState } from 'react'
 import ConfirmDeleteModal from './ConfirmDeleteModal'
 
-export default function DeletePostModal({ onClose, postData }) {
+export default function DeletePostModal({ onClose, postData, refreshPosts }) {
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [checkedButtons, setCheckedButtons] = useState([]);
@@ -13,7 +13,6 @@ export default function DeletePostModal({ onClose, postData }) {
     if(e.target.checked == true) {
       let newCheckedButtons = [...checkedButtons,e.target.value];
       setCheckedButtons(newCheckedButtons);
-      console.log(newCheckedButtons);
       if(newCheckedButtons.length > 0) {
         setDisableButton(false);
       }
@@ -23,7 +22,6 @@ export default function DeletePostModal({ onClose, postData }) {
       let index = newCheckedButtons.indexOf(e.target.value);
       newCheckedButtons.splice(index, 1);
       setCheckedButtons(newCheckedButtons);
-      console.log(newCheckedButtons);
       if(newCheckedButtons.length == 0) {
         setDisableButton(true);
       }
@@ -34,6 +32,8 @@ export default function DeletePostModal({ onClose, postData }) {
     const dateObject = new Date(date);
     return dateObject.toLocaleString('en-US');
   }
+
+
 
   async function deletePosts() {
     const headers = new Headers();
@@ -53,7 +53,13 @@ export default function DeletePostModal({ onClose, postData }) {
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.error(error));
-      
+
+    await refreshPosts();
+
+    ////
+    setShowConfirmModal(false);
+    ////
+
     onClose();
   }
 
@@ -94,8 +100,8 @@ export default function DeletePostModal({ onClose, postData }) {
         >Delete</button>
       {showConfirmModal && createPortal(
         <ConfirmDeleteModal 
-        onClose={(e) => setShowConfirmModal(false)}
-        deletePosts={deletePosts}
+        onClose={() => setShowConfirmModal(false)}
+        onConfirm={deletePosts}
         />,
         document.body
       )}      
