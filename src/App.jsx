@@ -2,6 +2,7 @@ import './App.css'
 import { useState, useEffect } from 'react';
 import Bloglist from './Bloglist.jsx'
 import AddPostButton from './AddPostButton.jsx'
+import DeletePostButton from './DeletePostButton.jsx';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
     <>
       <h1>The Blog</h1>
       <AddPostButton onPostCreated={fetchPosts}/>
+      <DeletePostButton postData={postData}/>
       <Bloglist postData={postData}/>
     </>
   )
