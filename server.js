@@ -52,6 +52,20 @@ app.post('/create', async (req, res) => {
   }
 });
 
+app.delete('/delete', async (req, res) => {
+  const { ids } = req.body;
+  if(!ids || !Array.isArray(ids)) {
+    res.status(400).json({ error: 'array is required' });
+  }
+  const query = 'DELETE FROM posts WHERE post_id = ANY($1)'
+  try {
+    const result = await pool.query(query, [ids]);
+    res.json({ message: 'Deleted successfully', count: result.rowCount, deleted: result.rows })
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Listening on ${port}`)
 })
