@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { createPortal } from 'react-dom'
 import DeletePostModal from './DeletePostModal'
 
-function DeletePostButton({ postData }) {
+function DeletePostButton({ postData, refreshPosts }) {
 
   const [showModal, setShowModal] = useState(false); 
 
@@ -12,6 +12,7 @@ function DeletePostButton({ postData }) {
       {showModal && createPortal(
         <DeletePostModal onClose={() => setShowModal(false)}
           postData={postData}
+          refreshPosts={refreshPosts}
         />,
         document.body
       )}
