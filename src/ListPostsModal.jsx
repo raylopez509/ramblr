@@ -1,9 +1,9 @@
-import './DeletePostModal.css'
+import './ListPostsModal.css'
 import { createPortal } from 'react-dom'
 import { useState } from 'react'
 import ConfirmDeleteModal from './ConfirmDeleteModal'
 
-export default function DeletePostModal({ onClose, postData, refreshPosts }) {
+export default function ListPostsModal({ onClose, postData, refreshPosts }) {
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [checkedButtons, setCheckedButtons] = useState([]);
@@ -77,7 +77,7 @@ export default function DeletePostModal({ onClose, postData, refreshPosts }) {
   }
 
   return (
-    <div className='modal'>DeletePostModal
+    <div className='modal'>Posts
       <table>
         <thead>  
           <tr>

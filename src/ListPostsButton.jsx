@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
-import DeletePostModal from './DeletePostModal'
+import ListPostsModal from './ListPostsModal'
 
-function DeletePostButton({ postData, refreshPosts }) {
+function ListPostsButton({ postData, refreshPosts }) {
 
   const [showModal, setShowModal] = useState(false); 
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Delete</button>
+      <button onClick={() => setShowModal(true)}>List Posts</button>
       {showModal && createPortal(
-        <DeletePostModal onClose={() => setShowModal(false)}
+        <ListPostsModal onClose={() => setShowModal(false)}
           postData={postData}
           refreshPosts={refreshPosts}
         />,
@@ -20,4 +20,4 @@ function DeletePostButton({ postData, refreshPosts }) {
   );
 }
 
-export default DeletePostButton;
+export default ListPostsButton;
