@@ -15,17 +15,16 @@ export default function DeletePostModal({ onClose, postData, refreshPosts }) {
     if(e.target.checked == true) {
       newCheckedButtons = [...checkedButtons,e.target.value];
       setCheckedButtons(newCheckedButtons);
-      checkDeleteButtonStatus(newCheckedButtons.length);
-      checkEditButtonStatus(newCheckedButtons.length);
     }
-    if(e.target.checked != true) {
+    else if(e.target.checked != true) {
       newCheckedButtons = checkedButtons;
       let index = newCheckedButtons.indexOf(e.target.value);
       newCheckedButtons.splice(index, 1);
       setCheckedButtons(newCheckedButtons);
-      checkDeleteButtonStatus(newCheckedButtons.length);
-      checkEditButtonStatus(newCheckedButtons.length);
-    }  
+    }
+    let checkedButtonNum = newCheckedButtons.length;
+    checkDeleteButtonStatus(checkedButtonNum);
+    checkEditButtonStatus(checkedButtonNum);      
   }
 
   function checkDeleteButtonStatus(checkedNum) {
