@@ -35,6 +35,28 @@ export default function DeletePostModal({ onClose, postData }) {
     return dateObject.toLocaleString('en-US');
   }
 
+  async function deletePosts() {
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    const body = JSON.stringify({
+      "ids" : checkedButtons
+    });
+
+    const requestOptions = {
+      method: "DELETE",
+      headers: headers,
+      body: body,
+    };
+    
+    await fetch("http://localhost:3000/delete", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error));
+      
+    onClose();
+  }
+
   return (
     <div className='modal'>DeletePostModal
       <table>
@@ -73,6 +95,7 @@ export default function DeletePostModal({ onClose, postData }) {
       {showConfirmModal && createPortal(
         <ConfirmDeleteModal 
         onClose={(e) => setShowConfirmModal(false)}
+        deletePosts={deletePosts}
         />,
         document.body
       )}      
