@@ -66,6 +66,19 @@ app.delete('/delete', async (req, res) => {
   }
 });
 
+app.put('/update', async (req, res) => {
+  const { id, title, content, tags, owner } = req.body;
+  const query = `UPDATE posts SET title = $2, content = $3, tags = $4, owner = $5 WHERE post_id = $1`;
+  const values = [id, title, content, tags, owner];
+  try {
+    const result = await pool.query(query, values);
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }  
+})
+
 app.listen(port, () => {
   console.log(`Listening on ${port}`)
 })
