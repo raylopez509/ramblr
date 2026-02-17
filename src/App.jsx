@@ -22,7 +22,8 @@ function App() {
     <>
       <h1>The Blog</h1>
       <AddPostButton onPostCreated={fetchPosts}/>
-      <DeletePostButton postData={postData}/>
+      <DeletePostButton postData={postData}
+      refreshPosts={fetchPosts}/>
       <Bloglist postData={postData}/>
     </>
   )
