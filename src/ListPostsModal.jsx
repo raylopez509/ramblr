@@ -2,13 +2,17 @@ import './ListPostsModal.css'
 import { createPortal } from 'react-dom'
 import { useState } from 'react'
 import ConfirmDeleteModal from './ConfirmDeleteModal'
+import EditPostModal from './EditPostModal';
 
 export default function ListPostsModal({ onClose, postData, refreshPosts }) {
 
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [checkedButtons, setCheckedButtons] = useState([]);
   const [disableDeleteButton, setDisableDeleteButton] = useState(true);
   const [disableEditButton, setDisableEditButton] = useState(true);
+
+  const [selectedPost, setSelectedPost] = useState(null);
 
   const handleCheckboxClick = (e) => {
     let newCheckedButtons = [];
@@ -76,6 +80,26 @@ export default function ListPostsModal({ onClose, postData, refreshPosts }) {
     onClose();
   }
 
+  async function handleEditButtonClick() {
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    const requestOptions = {
+      method: "GET",
+      headers: headers
+    };
+    const res = await fetch(`http://localhost:3000/post?id=${checkedButtons[0]}`, requestOptions);
+    const data = await res.json();
+    console.log(data);
+    setSelectedPost(data[0]);
+    setShowEditModal(true);
+  }
+
+  async function handleEditModalClose() {
+    setShowEditModal(false);
+    await refreshPosts();
+    onClose();
+  }
+
   return (
     <div className='modal'>Posts
       <table>
@@ -118,9 +142,17 @@ export default function ListPostsModal({ onClose, postData, refreshPosts }) {
         />,
         document.body
       )}  
-      <button
+      <button onClick={() => handleEditButtonClick()}
         disabled={disableEditButton}
-      >Edit</button>    
+        >Edit</button>
+      {showEditModal&& selectedPost && createPortal(
+        <EditPostModal
+        onClose={() => handleEditModalClose()}
+        {...selectedPost}
+        refreshPosts={refreshPosts}
+        />,
+        document.body
+      )}      
       <button onClick={onClose}>Close</button>    
     </div>
   )
