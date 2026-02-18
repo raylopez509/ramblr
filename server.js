@@ -79,6 +79,18 @@ app.put('/update', async (req, res) => {
   }  
 })
 
+app.get('/post', async (req, res) => {
+  const id = req.query.id
+  const query = `SELECT * FROM posts WHERE post_id = ${id}`;
+  try {
+    const result = await pool.query(query);
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+})
+
 app.listen(port, () => {
   console.log(`Listening on ${port}`)
 })
