@@ -3,12 +3,12 @@ import Editor from './Editor.jsx'
 import { useState } from 'react';
 import InputTag from './InputTag.jsx';
 
-function EditPostModal({ onClose, post_id, title, content, tags, owner, refreshPosts }) {
+function EditPostModal({ onClose, handlePostButtonClick, post_id, title, content, tags, owner, refreshPosts }) {
 
   const [postTitle, setPostTitle] = useState(title);
   const [postContent, setPostContent] = useState(content);
   const [postTags, setPostTags] = useState(tags)
-  
+
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
 
@@ -36,7 +36,7 @@ function EditPostModal({ onClose, post_id, title, content, tags, owner, refreshP
 
     await refreshPosts();
 
-    onClose();
+    handlePostButtonClick();
   }
 
   const handleTags = (tags) => {
