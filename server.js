@@ -15,7 +15,7 @@ const pool = new Pool({
   host: process.env.PG_HOST,
   database: process.env.PG_DATABASE,
   password: process.env.PG_PASSWORD,
-  port: process.env.PG_US,
+  port: process.env.PG_PORT,
 });
 
 app.get('/users', async (req, res) => {
@@ -82,8 +82,9 @@ app.put('/update', async (req, res) => {
 app.get('/post', async (req, res) => {
   const id = req.query.id
   const query = `SELECT * FROM posts WHERE post_id = ${id}`;
+  const values = [id];
   try {
-    const result = await pool.query(query);
+    const result = await pool.query(query, values);
     res.status(200).json(result.rows);
   } catch (err) {
     console.error(err);
