@@ -1,6 +1,6 @@
 import './ListPostsModal.css'
 import { createPortal } from 'react-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ConfirmDeleteModal from './ConfirmDeleteModal'
 import EditPostModal from './EditPostModal';
 
@@ -13,6 +13,20 @@ export default function ListPostsModal({ onClose, postData, refreshPosts }) {
   const [disableEditButton, setDisableEditButton] = useState(true);
 
   const [selectedPost, setSelectedPost] = useState(null);
+
+    useEffect(() => {
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
+    document.body.style.overflow = 'hidden';
+    const app = document.getElementById("root");
+    app.setAttribute("inert", "true");
+
+    return () => {
+      document.body.style.overflow = 'auto';
+      app.removeAttribute("inert")
+      document.body.style.paddingRight = "";
+    };
+  }, []);
 
   const handleCheckboxClick = (e) => {
     let newCheckedButtons = [];
@@ -101,7 +115,7 @@ export default function ListPostsModal({ onClose, postData, refreshPosts }) {
   }
 
   return (
-    <div className='modal'>Posts
+    <div className={`modal ${showConfirmModal || showEditModal ? "disabled" : ""}`}>Posts
       <table>
         <thead>  
           <tr>
@@ -147,7 +161,8 @@ export default function ListPostsModal({ onClose, postData, refreshPosts }) {
         >Edit</button>
       {showEditModal&& selectedPost && createPortal(
         <EditPostModal
-        onClose={() => handleEditModalClose()}
+        handlePostButtonClick={() => handleEditModalClose()}
+        onClose={() => setShowEditModal(false)}
         {...selectedPost}
         refreshPosts={refreshPosts}
         />,
