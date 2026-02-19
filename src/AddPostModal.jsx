@@ -1,12 +1,26 @@
 import './AddPostModal.css'
 import Editor from './Editor.jsx'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InputTag from './InputTag.jsx';
 
 function AddPostModal({ onClose, onPostCreated }) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingRight = `${scrollBarWidth}px`;
+    document.body.style.overflow = 'hidden';
+    const app = document.getElementById("root");
+    app.setAttribute("inert", "true");
+
+    return () => {
+      document.body.style.overflow = 'auto';
+      app.removeAttribute("inert")
+      document.body.style.paddingRight = "";
+    };
+  }, []);
 
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
