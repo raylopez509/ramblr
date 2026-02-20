@@ -11,7 +11,8 @@ services:
       - "${PG_PORT}:5432"
     volumes:
       - pgdata:/var/lib/postgresql
-      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./seed.sql:/docker-entrypoint-initdb.d/2-seed.sql
 
 volumes:
   pgdata:
