@@ -7,12 +7,17 @@ It can read, create, update, and delete posts that are created.
 
 The PostgreSQL Server is setup in Docker so you must have that installed in order to set it up
 
+```
 git clone https://github.com/raylopez509/ramblr
 cd ramblr
 cp .env.example .env
 docker compose up
+```
 
 After that finishes, in another terminal in same directory:
+
+```
 npm run dev
+```
 
 And it should run now
