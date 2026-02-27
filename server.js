@@ -29,8 +29,12 @@ app.get('/users', async (req, res) => {
 })
 
 app.get('/posts', async (req, res) => {
+  const {limit, page} = req.query;
+  const offset = (page-1) * limit;
+  const query = `SELECT * FROM posts ORDER BY date_created DESC LIMIT $1 OFFSET $2`;
   try {
-    const result = await pool.query('SELECT * FROM posts ORDER BY date_created DESC');
+    const values = [limit, offset]
+    const result = await pool.query(query, values);
     res.status(200).json(result.rows);
   } catch (err) {
     console.error(err);
