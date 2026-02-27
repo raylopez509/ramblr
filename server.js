@@ -85,7 +85,7 @@ app.put('/update', async (req, res) => {
 
 app.get('/post', async (req, res) => {
   const id = req.query.id
-  const query = `SELECT * FROM posts WHERE post_id = ${id}`;
+  const query = `SELECT * FROM posts WHERE post_id = $1`;
   const values = [id];
   try {
     const result = await pool.query(query, values);
